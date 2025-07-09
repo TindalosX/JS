@@ -10,58 +10,78 @@ const schemaCriptido = Joi.object({
 	id: Joi.string().alphanum().min(6).max(16).
 		required().
 		messages({
-			//~ 'string.min': `"id" debe tener un mínimo de {#limit} caracteres`,
-			//~ 'string.max': `"id" debe tener un máximo de {#limit} caracteres`,
+			'string.min': `"id" debe tener un mínimo de {#limit} caracteres`,
+			'string.max': `"id" debe tener un máximo de {#limit} caracteres`,
 			'any.required': `"id" es un campo obligatorio.`,
 			'string.empty': `"id" no puede ser vacío.`
 	}),
-	nombre: Joi.string().min(6, 'utf8').max(15).required().messages({
-		'string.min': '"nombre" debe tener al menos 6 caracteres'
+	nombre: Joi.string().min(6, 'utf8').max(15).
+		required().
+		messages({
+			'string.min': '"nombre" debe tener al menos 6 caracteres',
+			'string.max': '"nombre" debe tener un máximo de {#limit} caracteres',
+			'string.empty': `"nombre" no puede ser vacío.`,
+			'any.required': `"nombre" es un campo obligatorio.`,
+			
 		}),
 	tipo: Joi.array().
 		items(Joi.string().valid('acuatico', 'terrestre', 'volador', 'mitologico')).
 		min(1).message({ 'array.min': "Se debe definir al menos un tipo."}).
 		max(3).message({ 'array.max': "No se aceptan más de 3 tipos."}).
-		unique().
-		required(),
-		//~ descripcion: Joi.string().empty().message({'any.empty': "Se debe proporcionar una descripción"})
-		unNumero: Joi.number().ruleset.min(2).max(4).rule( { message : "El número debe estar en el rango [2, 4]"})
+		unique().messages({ 'array.unique': "No puede repetir tipos."}).
+		required()
 });
 
 let criptido = {
-	"id": '123451', //1234511111111111
-	"nombre": "Mitológico",
+	"id": '123456', //11111111111
+	"nombre": "xyzabc",
 	"tipo": [
 		'terrestre',
 		'mitologico',
 		//~ 'mitologico',
-		//~ 'mitologico',
 		//~ 'acuatico',
 		//~ 'volador'
-		//~ 'color'
+		'color'
 	],
-	//~ "descripcion": ""
-	"unNumero": 1
+	"origen": "ref()"
 }
 
 //~ let res = schemaCriptido.validate(criptido);
 //~ console.log(res)
 //~ console.log()
 
-
-// Desestructuración (destructuring) del método validate()
-const { value, error } = schemaCriptido.validate(criptido);
-
-if (error) {
-	console.log(error.details[0].message);
-	console.log(error.details[0].type);
-	//~ console.log(error.details);
-} else {
-	console.log("Criptido")
-	console.log(value)	
+function validarCriptido(object) {
+	return schemaCriptido.validate(object, {
+		stripUnknown: {
+			arrays: true,
+			objects: true
+		}
+	});
 }
 
+// Desestructuración (destructuring) del método validate()
+//~ const { value, error } = schemaCriptido.validate(criptido);
+
+//~ if (error) {
+	//~ console.log(error.details[0].message);
+	//~ console.log(error.details[0].type);
+	//~ console.log(error.details);
+//~ } else {
+	//~ console.log("Criptido")
+	//~ console.log(value)	
+//~ }
 
 
+const { value, error } = validarCriptido(criptido);
 
+if (error) {
+	console.log("A ocurrido un error en la validación");
+	console.log(error.details[0].message);
+	console.log(error.details[0].type);
+} else {
+	console.log("Validación correcta");
+}
+
+console.log(value);
+console.log();
 
