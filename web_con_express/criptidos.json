@@ -1,0 +1,37 @@
+[{
+	"id": "100000",
+	"nombre": "wendigo",
+	"tipo": [
+		"mitologico",
+		"espiritu"
+		]
+},
+{
+	"id": "100002",
+	"nombre": "bigfoot",
+	"tipo": ["terrestre"]
+},
+{
+	"id": "100003",
+	"nombre": "mothman",
+	"tipo": ["volador"]
+},
+{
+	"id": "100004",
+	"nombre": "kelpie",
+	"tipo": [
+		"acuatico",
+		"mitologico"
+		]
+},
+{
+	"id": "10005",
+	"nombre": "ningen",
+	"tipo": ["acuatico"]
+},
+{
+	"id": "100006",
+	"nombre": "chupacabras",
+	"tipo": ["terrestre"]
+}
+]
