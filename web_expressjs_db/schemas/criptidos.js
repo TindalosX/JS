@@ -1,4 +1,5 @@
-const Joi = require('joi')
+//~ const Joi = require('joi')
+import Joi from 'joi'
 
 const schemaCriptido = Joi.object({
 	id: Joi.string().alphanum().min(6).max(16).
@@ -32,10 +33,7 @@ const schemaCriptido = Joi.object({
 		messages({'any.only': "Tipo inválido.", 'any.required': `tipo: es un campo obligatorio.`})
 });
 
-//~ function validateCriptido(object) {
-	//~ return schemaCriptido.validate(object);
-//~ }
-function validateCriptido(method, input) {
+export function validateCriptido(method, input) {
 	
 	const schemaByMethod = schemaCriptido.tailor(method);
 
@@ -46,21 +44,3 @@ function validateCriptido(method, input) {
 		}
 	});
 }
-
-module.exports = {
-	validateCriptido
-}
-
-//~ const z = require('zod');
-
-//~ const criptidoSchema = z.object({
-	//~ id : z.string()
-	//~ .min(1, {error: "El Id debe tener al menos 3 caracteres"
-	//~ }),
-	//~ name: z.string().min(6, {error: "El nombre debe tener al menos 6 caracteres"}),
-	//~ type: z.string().min(6, {error: "El tipo debe tener al menos 6 caracteres"})
-//~ });
-
-//~ function validateCriptido(object) {
-	//~ return criptidoSchema.safeParse(object)
-//~ }
