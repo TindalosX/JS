@@ -1,0 +1,99 @@
+/* Reset CSS */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+ 
+*{
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+ 
+/*
+html{
+	color-scheme: dark light;
+}
+*/
+ 
+body{
+/*
+	min-height: 100svh;
+*/
+	line-height: 1;
+	font-size: 1rem;
+	font-family: "DejaVu Sans";
+}
+ 
+img, picture, svg, video{
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+ 
+h1, h2, h3, h4, h5, h6{
+	text-wrap: balance;
+}
+ 
+ol, ul{
+	list-style: none;
+}
+ 
+p{
+	max-width: 70ch;
+	text-wrap: pretty;
+}
+/*end reset*/
+
+body {
+	background-color: rgb( 10 80 20);
+}
+
+
+h1 {
+	margin: 4em 0 1em;
+	text-align: center;
+}
+
+.conte-form {
+	width: 860px;
+	border: 2px solid rgb( 10 10 20);
+	margin:	 1em auto;
+	padding: 1em;
+}
+
+h2 {
+	text-align: center;
+	font-size: 1.5em;
+	margin: 1em auto;
+	color: rgb(255 255 255);
+}
+
+form {
+	background-color: rgb(10 10 10);
+	padding: 1em;
+	color: white;
+}
+
+label {
+	display: inline-block;
+}
+
+label, input {
+	margin: .5em;
+}
+
+p {
+	margin: 1em 0;
+}
+
+#mess-error{
+	color: red;
+}
+
+
+
+
+
+
+
+

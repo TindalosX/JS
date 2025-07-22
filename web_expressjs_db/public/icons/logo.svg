@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg1"
+   inkscape:export-filename="bitmap.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="32"
+       height="32"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#d45500;stroke-width:1.55674"
+       id="path1"
+       cx="15.97026"
+       cy="16.059479"
+       rx="15.910781"
+       ry="16" />
+    <ellipse
+       style="fill:#1a1a1a"
+       id="path2"
+       cx="7.7323427"
+       cy="9.9925652"
+       rx="5.0557623"
+       ry="5.1152415" />
+    <ellipse
+       style="fill:#1a1a1a"
+       id="path3"
+       cx="19.003717"
+       cy="10.289963"
+       rx="5.5613384"
+       ry="5.3531599" />
+    <path
+       style="fill:#1a1a1a"
+       d="m 6.2453532,21.591078 c 17.0706318,0.118959 17.0706318,0.118959 17.0706318,0.118959 0,0 -21.4721188,2.141264 -17.0706318,-0.118959 z"
+       id="path4" />
+  </g>
+</svg>
