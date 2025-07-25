@@ -10,17 +10,17 @@
 		<div class="conte-form">
 			<h2>Buscar criptido</h2>
 			<form id="search" action="/criptidos">
-				<label>Nombre:<input type="text" placeholder="nombre" name="name" required></label><br>
+				<label>Nombre:<input type="text" placeholder="nombre" name="name" autocomplete="given-name" required></label><br>
 				<input type="submit" value="Buscar">
 			</form>
 		</div>
 		<div class="conte-form">
 			<h2>Agregar criptido</h2>
 			<form id="add-criptido">
-				<label for="id">Id:</label>
+				<label for="id-create">Id:</label>
 				<input id="id-create" type="text" placeholder="Id" name="id"><br>
 				
-				<label for="name">Nombre:</label>
+				<label for="name-create">Nombre:</label>
 				<input id="name-create" type="text" placeholder="Nombre" name="name" autocomplete="given-name"><br>
 
 				<p>Seleccionar al menos un tipo y máximo 3.</p>
@@ -38,9 +38,9 @@
 		<div class="conte-form">
 			<h2>Actualizar criptido</h2>
 			<form id="updateCriptido">
-				<label for="id">Id:</label>
+				<label for="id-update">Id:</label>
 				<input id="id-update" type="text" placeholder="Id" name="id"><br>
-				<label>Nombre:<input id="name-update" type="text" placeholder="nombre" name="name"></label><br>
+				<label>Nombre:<input id="name-update" type="text" placeholder="nombre" name="name" autocomplete="given-name"></label><br>
 				<input type="submit" value="Enviar">
 			</form>
 		</div>
