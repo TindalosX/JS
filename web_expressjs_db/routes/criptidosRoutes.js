@@ -2,8 +2,9 @@
 //modulares y montables.
 import { Router } from 'express';
 
-import criptidos from '../criptidos.json' with {type: 'json'} //Para importar archivos JSON en ESModules.
 import { validateCriptido } from '../schemas/criptidos.js';
+
+import { CriptidoModel } from '../models/criptido.js' //Importa el modelo del criptido.
 
 //Exportación de una instancia router.
 export const routerCriptidos = Router();
@@ -24,22 +25,11 @@ routerCriptidos.use(timeLog);
 //Buscar criptido
 routerCriptidos.get('/', (req, res) => {
 	const { name } = req.query;
+
+	const criptido = CriptidoModel.getByName( {name} );
+
+	res.send(criptido);
 	
-	if (name) {
-
-		let infoCriptido = criptidos.find(criptido =>
-			criptido.nombre.toLowerCase() === name.toLowerCase()
-		);
-
-		if (infoCriptido) {
-			console.log(infoCriptido);
-			return res.status(200).send(infoCriptido);
-		}
-
-		return res.status(400).send( {message: "No se encontro el criptido"});
-	} else {
-		res.send(criptidos);		
-	}
 });
 
 //Crear criptido.
@@ -53,14 +43,13 @@ routerCriptidos.post('/', (req, res) => {
 		const messError = error.details[0].message;
 		
 		//~ return res.status(400).json({ "mensaje error": error.details[0].message})
-		res.status(400).send({"Error": messError});
-	} else{
-
-		criptidos.push(value);
-		console.log("Criptido agregado. express");
-		
-		res.status(201).send(value);
+		return res.status(400).send({"Error": messError});
 	}
+
+	const nuevoCriptido = CriptidoModel.create(value);
+	console.log("Criptido agregado. express");
+	
+	res.status(201).send(value);
 });
 
 //Actualizar criptido
@@ -75,19 +64,15 @@ routerCriptidos.patch('/:id', (req, res) => {
 	} 
 
 	const { id }= req.params;
-	const criptidoIndex = criptidos.findIndex( criptido => criptido.id === id);
 
-	if (criptidoIndex === -1) {
+	const actualizacionCriptido = CriptidoModel.update({id, input: value})
+
+	if (actualizacionCriptido === false) {
 		return res.status(404).send({mensaje: "Criptido no encontrado"});
 	}
 
-	const actualCriptido = {
-		...criptidos[criptidoIndex],
-		...req.body
-	}
-
-	criptidos[criptidoIndex] = actualCriptido;
-	res.send(actualCriptido);
+	console.log("Actualización de criptido");
+	res.send(actualizacionCriptido);
 });
 
 
