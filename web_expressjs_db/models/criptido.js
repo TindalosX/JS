@@ -6,7 +6,7 @@ export class CriptidoModel {
 
 	//Método estático para obtener la información del criptido por su nombre.
 	//El método recibe un objeto.
-	static getByName({ name }) {
+	static async getByName({ name }) {
 		if (name) {
 			
 			let infoCriptido = criptidos.find(criptido =>
@@ -21,11 +21,11 @@ export class CriptidoModel {
 		return criptidos;
 	}
 
-	static create ( input ) {
+	static async create ( input ) {
 		criptidos.push(input);
 	}
 
-	static update( { id, input } ) {
+	static async update( { id, input } ) {
 		const criptidoIndex = criptidos.findIndex( criptido => criptido.id === id);
 
 		console.log("Value desde modelo", input)

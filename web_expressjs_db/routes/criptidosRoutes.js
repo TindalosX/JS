@@ -23,21 +23,21 @@ const timeLog = (req, res,next) => {
 routerCriptidos.use(timeLog);
 
 //Buscar criptido
-routerCriptidos.get('/', (req, res) => {
+routerCriptidos.get('/', async (req, res) => {
 	const { name } = req.query;
 
-	const criptido = CriptidoModel.getByName( {name} );
+	const criptido = await CriptidoModel.getByName( {name} );
 
 	res.send(criptido);
 	
 });
 
 //Crear criptido.
-routerCriptidos.post('/', (req, res) => {
+routerCriptidos.post('/', async (req, res) => {
 	const method = req.method.toLowerCase();
 	
 	//Usando Joi.
-	const { value, error }= validateCriptido(method, req.body);
+	const { value, error } = validateCriptido(method, req.body);
 	
 	if (error) {
 		const messError = error.details[0].message;
@@ -46,14 +46,14 @@ routerCriptidos.post('/', (req, res) => {
 		return res.status(400).send({"Error": messError});
 	}
 
-	const nuevoCriptido = CriptidoModel.create(value);
+	const nuevoCriptido = await CriptidoModel.create(value);
 	console.log("Criptido agregado. express");
 	
 	res.status(201).send(value);
 });
 
 //Actualizar criptido
-routerCriptidos.patch('/:id', (req, res) => {
+routerCriptidos.patch('/:id', async (req, res) => {
 	const method = req.method.toLowerCase();
 
 	const { value, error } = validateCriptido(method, req.body);
@@ -65,7 +65,7 @@ routerCriptidos.patch('/:id', (req, res) => {
 
 	const { id }= req.params;
 
-	const actualizacionCriptido = CriptidoModel.update({id, input: value})
+	const actualizacionCriptido = await CriptidoModel.update({id, input: value})
 
 	if (actualizacionCriptido === false) {
 		return res.status(404).send({mensaje: "Criptido no encontrado"});
