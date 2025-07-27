@@ -1,6 +1,4 @@
 import express, { json } from 'express';
-//~ import criptidos from './criptidos.json' with {type: 'json'} //Para importar archivos JSON en ESModules.
-//~ import { validateCriptido } from './schemas/criptidos.js';
 import { routerCriptidos } from './routes/criptidosRoutes.js';
 
 const app = express();
