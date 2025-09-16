@@ -1,68 +1,71 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, child, get, onValue, set } from 'firebase/database'
+import { searchCryptid, createCryptid, updateCryptid, deleteCryptid} from './crud.js'
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  //Aquí van los datos del objeto de configuración para la app.
-  
-};
+//key de la informacipon a buscar.
+let nombre = 'mothman';
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// ¿Por qué funciona? El await si no está dentro de una función async.
+//Fuciona porque el entorno de Node.js con módulos ES activados. Si no
+//de debe usar then() o debe estar dentro de otra función async.
 
-//Iniciliza RealTime Database y obtienen una instancia
-//al servicio.
-const db = getDatabase(app);
+//-> Buscar criptido.
+//-------OK----------
+/*const {error, data} = await searchCryptid(nombre);
 
-const dbRef = ref(db); //Referencia a la raíz de la base de datos.
+if (error) {
+	console.log(error);
+}
+if (data !== null) {
+	console.log("Mostrando información del criptido...");
 
-const idCriptido = '12345';
+	console.log("Nombre:", data.nombre);
+	console.log("Tipo:", data.tipo);
+} else {
+	console.log("No se encontro al criptido");
+}*/
+//---------------OK--
 
-//Construye la  ruta exacta de los datos solicitados.
-const refCriptido = child(dbRef, `recientes/${idCriptido}`);
-
-//Lee los datos una sola vez. --OK--
-//~ get(refCriptido).then( snapshot => {
-	//~ console.log("Info CRiptido");
-	//~ console.log(snapshot.val()); //Con val() rerecuperan los datos.
-//~ }).catch((error) => {
-  //~ console.error("¡Hubo un error al leer los datos!", error);
-//~ });
-
-//Leer los datos y escuchar los cambios se utiliza onValue(). --OK--
-//~ onValue(refCriptido, snapshot => {
-	//~ console.log(snapshot.val());
-//~ })
-
-// ¡Consejo PRO! (Gemini IA) Si solo quieres el valor una vez, pero con la sintaxis de listener,
-// puedes añadir { onlyOnce: true } al final del onValue:
-/*
-onValue(postsRef, (snapshot) => {
-  // ... tu código
-}, {
-  onlyOnce: true
-}, (error) => {
-  // ... manejo de error
-});
-*/
-
-//Agregar datos a una ruta con set(), reemplaza cualquier dato existente.
-// --OK
-const newCriptido = {
-	id: "12345",
+//-> Agregar datos el id es autogenerado por Firebase.
+//-------OK----------
+//Datos a agregar.
+/*const newCriptido = {
 	nombre: "nokotan",
 	tipo: [
-		"humano",
-		"venado"]
+		"híbidro"]
 }
 
-const refRecientes = child(dbRef, `recientes/${newCriptido.id}`);
+const {error, message} = await createCryptid(newCriptido);
+if (error) {
+	console.log(error);
+}else {
+	console.log(message);
+}*/
+//--------------OK--
 
-set(refRecientes, newCriptido);
-// OK--
+//->Actualizar/Modificar datos.
+//--------OK---------
+/*nombre = 'nokotan';
+const newData = {
+	description: "Híbrido entre humano y venado"
+}
 
+const { error, message } = await updateCryptid(nombre, newData);
 
+if (error) {
+	console.log('Error');
+	console.log(error);
+} else {
+	console.log('OK');
+	console.log(message);
+}*/
+//--------------OK--
 
-//~ https://firebase.google.com/docs/admin/setup?authuser=0&hl=es-419#prerequisites
+//-> Eliminar registro.
+//-------OK----------
+//~ const { error, message } = await deleteCryptid(nombre);
+
+//~ if (error) {
+	//~ console.log(error);
+//~ } else {
+	//~ console.log(message);
+//~ }
+//--------------OK--
