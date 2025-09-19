@@ -3,16 +3,15 @@ document.getElementById('add-criptido').addEventListener('submit', async functio
     event.preventDefault(); // Evita la recarga de la página
 
     // Obtener los valores del formulario
-    const id = document.getElementById('id-create').value;
+    //~ const id = document.getElementById('id-create').value;
     const name = document.getElementById('name-create').value;
     const types = Array.from(document.querySelectorAll('input[name="type[]"]:checked'))
                      .map(checkbox => checkbox.value);
 
     // Crear el objeto de datos a enviar
     const data = {
-        id: id,
-        name: name,
-        type: types
+        nombre: name,
+        tipo: types
     };
 
     try {
@@ -26,19 +25,34 @@ document.getElementById('add-criptido').addEventListener('submit', async functio
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.Error || 'Error en la solicitud');
+            const error = new Error(errorData.Error || 'Error en la solicitud');
+            error.status = response.status;
+            throw error;
         }
 
         const result = await response.json();
-        console.log('Criptido agregado:', result);
+
+        if (result.message) {
+			const addMessError = document.getElementById('mess-error')
+			addMessError.textContent = '-> ' + result.message;
+		}
         
         // Opcional: Limpiar el formulario
         document.getElementById('add-criptido').reset();
         
     } catch (error) {
-        console.error('Error:', error.message);
-        const addMessError = document.getElementById('mess-error')
-        addMessError.textContent = '⚠ ' + error.message;
+        switch (error.status)
+		{
+			case 400:
+				const addMessError = document.getElementById('mess-error')
+				addMessError.textContent = '⚠ ' + error.message;//'Ha ocurrido un error al crear el registro';
+				break;
+			case 403:
+				window.location.href = '../pages/http/403.html'
+				break;
+			default:
+				console.log("switch->",error)
+		}
     }
 });
 
